@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Testing</title>
+
+  </head>
+
+  <body>
+	hello traveler!
+  </body>
+
+
+<script type="text/javascript">
+
+function aswidgetloadedcallback(){
+		console.log("Test");
+		_add.push({"active_cart":true});
+}
+
+</script>
+<script type="text/javascript">
+    var AddShoppersWidgetOptions = { 'loadCss': false };
+    (!function(){
+        var t=document.createElement("script");
+        t.type="text/javascript",
+        t.async=!0,
+        t.id="AddShoppers",
+        t.src="https://shop.pe/widget/widget_async.js#5fdccd1dbbddbd6011e2195e",
+        document.getElementsByTagName("head")[0].appendChild(t)
+    }());
+</script>
+
+</html>
+

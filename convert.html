@@ -1,0 +1,57 @@
+
+
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+
+	<style>
+		body{
+			background-color: rgba(0,0,0,.5);
+		}
+		.convertContent{
+			background: #ffffff;
+			width: 60%;
+    			padding: 20px;
+    			border-radius: 20px;
+		}
+
+	</style>
+
+</head>
+
+<body>
+
+<!-- Content here -->
+
+<center>
+	<div class="convertContent">
+		<img src="images/checkmark.png" style="width:200px; height:auto;" alt="checkmark" />
+		<h1>THANK YOU!</h1>
+		<h3>Your order number <span id="orderNumber"></span> has been received. <br>Please test whatever you are working on responsibly :p</h3>
+	</div>
+</center>
+
+
+<script type="text/javascript">
+console.log("DEMO.ADDSHOPPERS.COM ACCOUNT");
+const now = new Date()  
+const secondsSinceEpoch = Math.round(now.getTime() / 1000)  
+console.log("seconds since epoc / order id: " + secondsSinceEpoch);
+document.querySelector("#orderNumber").innerHTML = secondsSinceEpoch;
+
+AddShoppersConversion = {
+        order_id: secondsSinceEpoch,
+        value: "1"
+};
+var js = document.createElement('script'); js.type = 'text/javascript'; js.async = true; js.id = 'AddShoppers';
+js.src = ('https:' == document.location.protocol ? 'https://shop.pe/widget/' : 'http://cdn.shop.pe/widget/') + 'widget_async.js#52f4037ea387646c20a79c9b';
+document.getElementsByTagName("head")[0].appendChild(js);
+</script>
+
+
+
+</body>
+</html>
+
+
