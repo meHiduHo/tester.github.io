@@ -99,6 +99,29 @@
             short_login: ['facebook', 'twitter'],
         };
         window.StagingPixel = 'https://shopper-staging.shop.pe/pixel.png';
+
+
+        if(document.URL.search("dev1") > 0){
+                var AddShoppersWidgetOptions = {
+                        staging: true,
+                        environment: "dev1"
+                };
+                window.StagingPixel = 'https://shopper-dev1.shop.pe/pixel.png';
+        } else if(document.URL.search("dev2") > 0){
+                var AddShoppersWidgetOptions = {
+                        staging: true,
+                        environment: "dev2"
+                };
+                window.StagingPixel = 'https://shopper-dev2.shop.pe/pixel.png';
+        }else if(document.URL.search("dev3") > 0){
+                var AddShoppersWidgetOptions = {
+                        staging: true,
+                        environment: "dev3"
+                };
+                window.StagingPixel = 'https://shopper-dev3.shop.pe/pixel.png';
+        }
+
+
     </script>
 
 
