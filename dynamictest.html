@@ -210,7 +210,7 @@
   <!-- Dynamic Widget -->
   <script type="text/javascript">
       var srcurl = "";
-      if(env !== "staging"){
+      if(env !== "staging" && env !== "live"){
         srcurl = 'https://storage.googleapis.com/addshoppers-widget-'+env+'/widget/widget_async.js#'+siteid;
       } else if(env == "live"){
         srcurl = "https://shop.pe/widget/widget_async.js#" + siteid;
