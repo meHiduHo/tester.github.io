@@ -193,13 +193,23 @@
             short_login: ['facebook', 'twitter'],
         };
         
-        if(env !== "staging"){ //if its set to something other than staging
+	if(env == "live"){
+          var AddShoppersWidgetOptions = {
+            staging: false,
+            environment: env
+          };
+          window.StagingPixel = 'https://shopper.shop.pe/pixel.png';
+          var AddShoppersTracking = {
+            trending_wall_url: 'https://app.addshoppers.com/widget/examples/staging/wall.html',
+            short_login: ['facebook', 'twitter'],
+          };
+        } else if(env !== "staging"){ //if its set to something other than staging
           var AddShoppersWidgetOptions = {
             staging: true,
             environment: env
           };
           window.StagingPixel = 'https://shopper-'+env+'.shop.pe/pixel.png';
-        } else { //if its set to staging or defaulted to it
+	} else { //if its set to staging or defaulted to it
           var AddShoppersWidgetOptions = {
             staging: true
           };
