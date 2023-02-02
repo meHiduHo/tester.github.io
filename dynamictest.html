@@ -211,7 +211,8 @@
           window.StagingPixel = 'https://shopper-'+env+'.shop.pe/pixel.png';
 	} else { //if its set to staging or defaulted to it
           var AddShoppersWidgetOptions = {
-            staging: true
+            staging: true,
+	    environment: "staging"
           };
           window.StagingPixel = 'https://shopper-staging.shop.pe/pixel.png';
         }
