@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>dynamic testing page</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <!-- CSS -->
+    <link href="style.css" rel="stylesheet">
+    <meta name="robots" content="noindex,follow" />
+
+  </head>
+
+  <body>
+    <main class="container">
+
+      <!-- Left Column / Headphones Image -->
+      <div class="left-column">
+        <img data-image="black" src="images/black.png" alt="">
+        <img data-image="blue" src="images/blue.png" alt="">
+        <img data-image="red" class="active" src="images/red.png" alt="">
+      </div>
+
+
+      <!-- Right Column -->
+      <div class="right-column">
+
+        <!-- Product Description -->
+        <div class="product-description">
+          <span>Headphones</span>
+          <h1>Beats EP</h1>
+          <p>The preferred choice of a vast range of acclaimed DJs. Punchy, bass-focused sound and high isolation. Sturdy headband and on-ear cushions suitable for live performance</p>
+        </div>
+
+        <!-- Product Configuration -->
+        <div class="product-configuration">
+
+          <!-- Product Color -->
+          <div class="product-color">
+            <span>Color</span>
+
+            <div class="color-choose">
+              <div>
+                <input data-image="red" type="radio" id="red" name="color" value="red" checked>
+                <label for="red"><span></span></label>
+              </div>
+              <div>
+                <input data-image="blue" type="radio" id="blue" name="color" value="blue">
+                <label for="blue"><span></span></label>
+              </div>
+              <div>
+                <input data-image="black" type="radio" id="black" name="color" value="black">
+                <label for="black"><span></span></label>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Cable Configuration -->
+          <div class="cable-config">
+            <span>Cable configuration</span>
+
+            <div class="cable-choose">
+              <button>Straight</button>
+              <button>Coiled</button>
+              <button>Long-coiled</button>
+            </div>
+
+            <a href="#">How to configurate your headphones</a>
+          </div>
+        </div>
+
+        <!-- Product Pricing -->
+        <div class="product-price">
+          <span>148$</span>
+          <a href="convert.html" class="cart-btn">Add to cart</a>
+        </div>
+
+	<br />
+     	<div>
+		<h3>Coupon Code</h3>
+                <input type="Text" placeholder="coupon code" class="offer_code" id="offer_code" />
+        </div>
+
+      </div>
+
+<div id="AddShoppersWall"></div>
+
+    </main>
+
+<!-- Scripts -->
+
+	<!-- url variables script -->
+  <script>
+    function getAllUrlParams(url) {
+
+      // get query string from url (optional) or window
+      var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
+
+      // we'll store the parameters here
+      var obj = {};
+
+      // if query string exists
+      if (queryString) {
+
+        // stuff after # is not part of query string, so get rid of it
+        queryString = queryString.split('#')[0];
+
+        // split our query string into its component parts
+        var arr = queryString.split('&');
+
+        for (var i = 0; i < arr.length; i++) {
+          // separate the keys and the values
+          var a = arr[i].split('=');
+
+          // set parameter name and value (use 'true' if empty)
+          var paramName = a[0];
+          var paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
+
+          // (optional) keep case consistent
+          paramName = paramName.toLowerCase();
+          if (typeof paramValue === 'string') paramValue = paramValue.toLowerCase();
+
+          // if the paramName ends with square brackets, e.g. colors[] or colors[2]
+          if (paramName.match(/\[(\d+)?\]$/)) {
+
+            // create key if it doesn't exist
+            var key = paramName.replace(/\[(\d+)?\]/, '');
+            if (!obj[key]) obj[key] = [];
+
+            // if it's an indexed array e.g. colors[2]
+            if (paramName.match(/\[\d+\]$/)) {
+              // get the index value and add the entry at the appropriate position
+              var index = /\[(\d+)\]/.exec(paramName)[1];
+              obj[key][index] = paramValue;
+            } else {
+              // otherwise add the value to the end of the array
+              obj[key].push(paramValue);
+            }
+          } else {
+            // we're dealing with a string
+            if (!obj[paramName]) {
+              // if it doesn't exist, create property
+              obj[paramName] = paramValue;
+            } else if (obj[paramName] && typeof obj[paramName] === 'string'){
+              // if property does exist and it's a string, convert it to an array
+              obj[paramName] = [obj[paramName]];
+              obj[paramName].push(paramValue);
+            } else {
+              // otherwise add the property
+              obj[paramName].push(paramValue);
+            }
+          }
+        }
+      }
+
+      return obj;
+    }
+
+    //getAllUrlParams().product
+    //defaults - site id, environment, ga id, 
+    //defaults to staging
+    var siteid = "4e68f7ab2aa35f12c0000031";
+    var env = "staging";
+    var gaid = "344236612";
+
+
+    if(getAllUrlParams().siteid){
+      siteid = getAllUrlParams().siteid;
+    }
+    if(getAllUrlParams().env){
+      env = getAllUrlParams().env;
+    }
+    if(getAllUrlParams().gaid){
+      gaid = getAllUrlParams().gaid;
+    }
+    localStorage.setItem('siteid', siteid);
+    localStorage.setItem('env', env);
+    localStorage.setItem('gaid', gaid);
+
+    console.log("site id: " + siteid);
+    console.log('environment (staging, live, dev1, dev2, dev3): ' + env); 
+    console.log("GA id: " + gaid);
+  </script>
+
+
+
+  <!-- Dynamic environment -->
+  <script type="text/javascript">
+        var AddShoppersTracking = {
+            trending_wall_url: 'https://app-staging.addshoppers.com/widget/examples/staging/wall.html',
+            short_login: ['facebook', 'twitter'],
+        };
+        
+	if(env == "live"){
+          var AddShoppersWidgetOptions = {
+            staging: false,
+            environment: env
+          };
+          window.StagingPixel = 'https://shopper.shop.pe/pixel.png';
+          var AddShoppersTracking = {
+            trending_wall_url: 'https://app.addshoppers.com/widget/examples/staging/wall.html',
+            short_login: ['facebook', 'twitter'],
+          };
+        } else if(env !== "staging"){ //if its set to something other than staging
+          var AddShoppersWidgetOptions = {
+            staging: true,
+            environment: env
+          };
+          window.StagingPixel = 'https://shopper-'+env+'.shop.pe/pixel.png';
+	} else { //if its set to staging or defaulted to it
+          var AddShoppersWidgetOptions = {
+            staging: true,
+	    environment: "staging"
+          };
+          window.StagingPixel = 'https://shopper-staging.shop.pe/pixel.png';
+        }
+  </script>
+
+  <!-- Dynamic Widget -->
+  <script type="text/javascript">
+      var srcurl = "";
+      if(env !== "staging" && env !== "live"){
+        srcurl = 'https://storage.googleapis.com/addshoppers-widget-'+env+'/widget/widget_async.js#'+siteid;
+      } else if(env == "live"){
+        srcurl = "https://shop.pe/widget/widget_async.js#" + siteid;
+      } else {
+        srcurl = 'https://dosm89dzxinxn.cloudfront.net/widget/widget_async.js#' + siteid;
+      }
+      console.log("source url: "+ srcurl);
+        var js = document.createElement('script'); js.type = 'text/javascript'; js.async = true; js.id = 'AddShoppers';
+        js.src = srcurl;
+        document.getElementsByTagName("head")[0].appendChild(js);
+    </script>
+
+
+<!-- Dynamic GA script -->
+
+<!-- GA v4 -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C6L12RZCLE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-C6L12RZCLE');
+</script>
+
+
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
+    	<script src="script.js" charset="utf-8"></script>
+  </body>
+</html>
+
