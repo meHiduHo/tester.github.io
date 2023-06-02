@@ -246,7 +246,24 @@
   gtag('config', 'UA-24264728-3');
 </script>
 
-
+<!-- test script -->
+<script>
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded');
+    if(typeof _add !== 'undefined'){
+        //CALL FUNCTION TO LOAD CUSTOM JS
+        console.log("_add loaded");
+    }
+  });
+} else {
+    console.log('DOM already loaded');
+    if(typeof _add !== 'undefined'){
+        //CALL FUNCTION TO LOAD CUSTOM JS
+        console.log("_add loaded");
+    }
+}
+</script>
 
 
     	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
