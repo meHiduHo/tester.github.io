@@ -249,21 +249,14 @@
 
 <!-- test script -->
 <script>
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded');
+window.addEventListener("load", (event) => {
+  console.log("page is fully loaded");
     if(typeof _add !== 'undefined'){
         //CALL FUNCTION TO LOAD CUSTOM JS
         console.log("_add loaded");
     }
-  });
-} else {
-    console.log('DOM already loaded');
-    if(typeof _add !== 'undefined'){
-        //CALL FUNCTION TO LOAD CUSTOM JS
-        console.log("_add loaded 2");
-    }
-}
+});
+
 </script>
 
 
